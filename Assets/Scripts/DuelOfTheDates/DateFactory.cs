@@ -107,6 +107,7 @@ namespace FiveXT.DuelOfTheDates
         private List<string> movies = new List<string>()
         {
             "Ace Ventura",
+            "Ace Ventura 2",
             "The Mask",
             "Dumb and Dumber",
             "Batman Forever",
@@ -119,16 +120,19 @@ namespace FiveXT.DuelOfTheDates
             "Sonic the Hedgehog"
         };
 
-        // Start is called before the first frame update
-        void Start()
+        public DateModel CreateRandomModel()
         {
+            DateModel model = new DateModel();
+            //TODO: Fill out appearance and make sure you dont accidentally create an identical looking character
 
-        }
+            model.firstName = firstNames[Random.Range(0, firstNames.Count)];
+            model.birthMonth = birthMonths[Random.Range(0, birthMonths.Count)];
+            model.hobby = hobbies[Random.Range(0, hobbies.Count)];
+            model.bloodType = bloodTypes[Random.Range(0, bloodTypes.Count)];
+            model.homeTown = homeTowns[Random.Range(0, homeTowns.Count)];
+            model.movie = movies[Random.Range(0, movies.Count)];
 
-        // Update is called once per frame
-        void Update()
-        {
-
+            return model;
         }
     }
 }

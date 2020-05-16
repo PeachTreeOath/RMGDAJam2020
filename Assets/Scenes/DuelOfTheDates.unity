@@ -546,6 +546,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dater2
       objectReference: {fileID: 0}
+    - target: {fileID: 1913263836689506659, guid: e1fdb5a5f23f34d47b01d1e11b0bfe53,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1fdb5a5f23f34d47b01d1e11b0bfe53, type: 3}
 --- !u!1 &840309472
@@ -1258,6 +1263,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dater1
       objectReference: {fileID: 0}
+    - target: {fileID: 1913263836689506659, guid: e1fdb5a5f23f34d47b01d1e11b0bfe53,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1fdb5a5f23f34d47b01d1e11b0bfe53, type: 3}
 --- !u!1001 &3611830955264514990
@@ -1275,12 +1285,12 @@ PrefabInstance:
     - target: {fileID: 3572322595142799211, guid: 3d1dbd39299c819409d7f61655ae31c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.75
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3572322595142799211, guid: 3d1dbd39299c819409d7f61655ae31c1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 3572322595142799211, guid: 3d1dbd39299c819409d7f61655ae31c1,
         type: 3}

@@ -4,8 +4,14 @@ using UnityEngine;
 
 namespace FiveXT.DuelOfTheDates
 {
-    public class DateModel : MonoBehaviour
+    public class DateModel
     {
+        public int hairStyle;
+        public int hairColor;
+        public int glasses;
+        public int shirtColor;
+        public int skirtColor;
+
         public string firstName;
         public string birthMonth;
         public string hobby;

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9149395838042044924}
   m_Layer: 0
   m_Name: Dater
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4657d10c4f98dbc4fa07b423f4d3eeed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
+  playerNum: 1
   moveSpeed: 1
 --- !u!212 &1854917613
 SpriteRenderer:
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a4ad62c208af3c546b62f2321ac274a3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd1925312c93a3749897a662f6393c3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

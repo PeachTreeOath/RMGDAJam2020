@@ -324,7 +324,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.27999288, g: 0.41509432, b: 0.31420854, a: 0}
+  m_BackGroundColor: {r: 0.6128455, g: 0.3285422, b: 0.6509434, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -444,6 +444,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3509040631471425208, guid: 9daab141a5d5e2140aeaffbc2674c435,
+        type: 3}
+      propertyPath: sceneName
+      value: DuelOfTheDates
+      objectReference: {fileID: 0}
     - target: {fileID: 3509040631471425214, guid: 9daab141a5d5e2140aeaffbc2674c435,
         type: 3}
       propertyPath: m_Name
@@ -518,10 +523,40 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 275
       objectReference: {fileID: 0}
-    - target: {fileID: 1997621334845243402, guid: 90913afdd78460a42ba204526cfeebf0,
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
+      propertyPath: m_text
+      value: 'L-Stick walk / A choose
+
+        Phase 1: Memorize the girls'' info
+
+        Phase
+        2: Choose the correct answer
+
+        before your opponent does
+
+        First
+        to 5 wins!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382184034825, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
@@ -633,10 +668,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: LobbyCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_text
+      value: Duel of the Dates
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6532621383120392869, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -275
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319053349743381488, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90913afdd78460a42ba204526cfeebf0, type: 3}

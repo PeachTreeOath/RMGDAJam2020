@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace FiveXT.SnakeSnipe
 {
-    public class SnakeSnipeGameManager : Singleton<SnakeSnipeGameManager>
+    public class GameManager_SnakeSnipe : Singleton<GameManager_SnakeSnipe>, IGameStartCountdownListener
     {
         // Inspector set
         public GameObject bombPrefab;
@@ -16,18 +16,22 @@ namespace FiveXT.SnakeSnipe
         public Vector2 brBounds;
         public float bombSpawnTime;
 
+        [HideInInspector] public bool isGameStarted;
         [HideInInspector] public bool isGameOver;
+
         private float bombTimeElapsed;
         private float currBombSpawnTime;
 
         private void Start()
         {
+            GameStartCountdown.instance.RegisterListener(this);
+
             currBombSpawnTime = bombSpawnTime;
         }
 
         private void Update()
         {
-            if (isGameOver) return;
+            if (!IsGamePlayable()) return;
 
             bombTimeElapsed += Time.deltaTime;
 
@@ -49,11 +53,21 @@ namespace FiveXT.SnakeSnipe
             currBombSpawnTime *= 0.975f;
         }
 
+        public void GameStart()
+        {
+            isGameStarted = true;
+        }
+
         public void GameOver(int playerNum)
         {
             isGameOver = true;
             gameOverCanvas.SetActive(true);
             winnerText.text = "Player " + (playerNum + 1) + " wins!";
+        }
+
+        public bool IsGamePlayable()
+        {
+            return isGameStarted && !isGameOver;
         }
     }
 }

@@ -30,7 +30,6 @@ namespace FiveXT.SnakeSnipe
 
         private PlayerInputActions inputAction;
         private Vector2 movementInput;
-        private Vector2 lookPosition;
 
         private Transform currBodyPart;
         private float shotTimeElapsed;
@@ -62,21 +61,23 @@ namespace FiveXT.SnakeSnipe
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (!GameManager_SnakeSnipe.instance.IsGamePlayable()) return;
+
             shotTimeElapsed += Time.fixedDeltaTime;
 
             float h = movementInput.x;
             float v = movementInput.y;
 
-            float currSpeed = moveSpeed * Time.fixedDeltaTime;
+            float currSpeed = (moveSpeed + (0.5f * (beginSize - bodyParts.Count))) * Time.fixedDeltaTime;
 
             Rigidbody2D rigidbody = bodyParts[0].GetComponent<Rigidbody2D>();
             rigidbody.MovePosition(rigidbody.position + (Vector2)(rigidbody.transform.up * currSpeed));
             rigidbody.MoveRotation(rigidbody.rotation - h * rotSpeed * Time.fixedDeltaTime);
 
-            if (rigidbody.position.x > SnakeSnipeGameManager.instance.brBounds.x ||
-               rigidbody.position.x < SnakeSnipeGameManager.instance.ulBounds.x ||
-               rigidbody.position.y < SnakeSnipeGameManager.instance.brBounds.y ||
-               rigidbody.position.y > SnakeSnipeGameManager.instance.ulBounds.y)
+            if (rigidbody.position.x > GameManager_SnakeSnipe.instance.brBounds.x ||
+               rigidbody.position.x < GameManager_SnakeSnipe.instance.ulBounds.x ||
+               rigidbody.position.y < GameManager_SnakeSnipe.instance.brBounds.y ||
+               rigidbody.position.y > GameManager_SnakeSnipe.instance.ulBounds.y)
                 rigidbody.position = Vector3.zero; // In case they tunnel out of the arena
 
             prevPositions.Enqueue(rigidbody.position);
@@ -114,7 +115,7 @@ namespace FiveXT.SnakeSnipe
 
         public void OnMove(InputValue value)
         {
-            if (SnakeSnipeGameManager.instance.isGameOver) return;
+            if (!GameManager_SnakeSnipe.instance.IsGamePlayable()) return;
 
             movementInput = value.Get<Vector2>();
         }
@@ -126,7 +127,7 @@ namespace FiveXT.SnakeSnipe
 
         public void OnAction1()
         {
-            if (SnakeSnipeGameManager.instance.isGameOver) return;
+            if (!GameManager_SnakeSnipe.instance.IsGamePlayable()) return;
 
             if (shotTimeElapsed > shotCooldownInSecs)
             {
@@ -142,7 +143,7 @@ namespace FiveXT.SnakeSnipe
 
         public void OnStart()
         {
-            if (SnakeSnipeGameManager.instance.isGameOver)
+            if (GameManager_SnakeSnipe.instance.isGameOver)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -151,7 +152,7 @@ namespace FiveXT.SnakeSnipe
             // Destroy a body part
             if (bodyParts.Count == 2)
             {
-                SnakeSnipeGameManager.instance.GameOver(playerNum);
+                GameManager_SnakeSnipe.instance.GameOver(playerNum);
             }
             else
             {

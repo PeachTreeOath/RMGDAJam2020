@@ -25,10 +25,8 @@ namespace FiveXT.SnakeSnipe
             {
                 collision.gameObject.GetComponentInParent<SnakeController>().TakeHit();
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+
+            Destroy(gameObject);
         }
     }
 }

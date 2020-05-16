@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace FiveXT.SnakeSnipe
 {
@@ -17,6 +18,7 @@ namespace FiveXT.SnakeSnipe
         public GameObject shotMeter;
         public Sprite snakeHead;
         public Sprite snakeBody;
+        public Sprite snakeBodyDark;
         public Sprite snakeTail;
 
         public float moveSpeed;
@@ -71,6 +73,12 @@ namespace FiveXT.SnakeSnipe
             rigidbody.MovePosition(rigidbody.position + (Vector2)(rigidbody.transform.up * currSpeed));
             rigidbody.MoveRotation(rigidbody.rotation - h * rotSpeed * Time.fixedDeltaTime);
 
+            if (rigidbody.position.x > SnakeSnipeGameManager.instance.brBounds.x ||
+               rigidbody.position.x < SnakeSnipeGameManager.instance.ulBounds.x ||
+               rigidbody.position.y < SnakeSnipeGameManager.instance.brBounds.y ||
+               rigidbody.position.y > SnakeSnipeGameManager.instance.ulBounds.y)
+                rigidbody.position = Vector3.zero; // In case they tunnel out of the arena
+
             prevPositions.Enqueue(rigidbody.position);
             prevRotations.Enqueue(rigidbody.rotation);
 
@@ -106,6 +114,8 @@ namespace FiveXT.SnakeSnipe
 
         public void OnMove(InputValue value)
         {
+            if (SnakeSnipeGameManager.instance.isGameOver) return;
+
             movementInput = value.Get<Vector2>();
         }
 
@@ -114,8 +124,10 @@ namespace FiveXT.SnakeSnipe
             // Do nothing
         }
 
-        public void Action1()
+        public void OnAction1()
         {
+            if (SnakeSnipeGameManager.instance.isGameOver) return;
+
             if (shotTimeElapsed > shotCooldownInSecs)
             {
                 Instantiate(bulletPrefab, bodyParts[0].position + (bodyParts[0].transform.up), bodyParts[0].rotation);
@@ -123,19 +135,30 @@ namespace FiveXT.SnakeSnipe
             }
         }
 
-        public void Action2()
+        public void OnAction2()
         {
             // Do nothing
         }
 
         public void OnStart()
         {
-            // Do nothing
+            if (SnakeSnipeGameManager.instance.isGameOver)
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void TakeHit()
         {
-            throw new NotImplementedException();
+            // Destroy a body part
+            if (bodyParts.Count == 2)
+            {
+                SnakeSnipeGameManager.instance.GameOver(playerNum);
+            }
+            else
+            {
+                Transform partToDestroy = bodyParts[bodyParts.Count - 2];
+                bodyParts.Remove(partToDestroy);
+                partToDestroy.GetComponent<SpriteRenderer>().sprite = snakeBodyDark;
+            }
         }
 
         private void AddBodyPart(bool isTail)

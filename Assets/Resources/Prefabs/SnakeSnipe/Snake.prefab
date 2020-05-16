@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4449849939897505479}
   - component: {fileID: 4449849939897505477}
-  - component: {fileID: 8630026890817168239}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -54,61 +53,15 @@ MonoBehaviour:
   shotMeter: {fileID: 4449849940575831750}
   snakeHead: {fileID: 21300000, guid: 808e801d6020a1d4cb0bed07d415b2d6, type: 3}
   snakeBody: {fileID: 21300000, guid: 9e2f4dd29fdbef243893d5283bb1fd18, type: 3}
+  snakeBodyDark: {fileID: 21300000, guid: 0708d2adab815874cb223c0b3c793d85, type: 3}
   snakeTail: {fileID: 21300000, guid: 7154236740a54c942832ace5c0720f80, type: 3}
   moveSpeed: 3
   rotSpeed: 200
-  beginSize: 6
+  beginSize: 8
   minDistance: 10
   shotCooldownInSecs: 1
   bodyParts:
   - {fileID: 743171659327142900}
---- !u!114 &8630026890817168239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4449849939897505476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: fac62378d8809e7478a83ddcb09fc8ae,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 16508c35-8af8-49cb-9d80-3b805e088b40
-    m_ActionName: Player Controls/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2b7a8dc6-a1a8-4381-810a-f7e94f88e9c4
-    m_ActionName: Player Controls/FireDirection[/XInputControllerWindows/rightStick,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f1baa74-d619-4464-af60-ff44ebc2afff
-    m_ActionName: Player Controls/Action1[/Keyboard/f,/XInputControllerWindows/buttonSouth]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 55d9e3f3-5bcc-4171-8d56-fbb39d33d0ba
-    m_ActionName: Player Controls/Action2[/XInputControllerWindows/buttonEast,/Keyboard/g]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Player Controls
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &4449849940575831750
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +150,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4449849939897505479}
     m_Modifications:
+    - target: {fileID: 3874606009512377352, guid: a2fd46420ce632a40b8c5ff316cdfd5a,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4004065511033036106, guid: a2fd46420ce632a40b8c5ff316cdfd5a,
         type: 3}
       propertyPath: m_LocalPosition.x

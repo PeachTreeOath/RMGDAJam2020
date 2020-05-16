@@ -28,22 +28,24 @@ namespace FiveXT.Core
                 controlledObject.OnAim(value);
         }
 
-        public void Action1()
+        public void OnAction1()
         {
             if (controlledObject != null)
-                controlledObject.Action1();
+                controlledObject.OnAction1();
         }
 
-        public void Action2()
+        public void OnAction2()
         {
             if (controlledObject != null)
-                controlledObject.Action2();
+                controlledObject.OnAction2();
         }
 
         public void OnStart()
         {
             if (GameLobbyStarter.instance != null)
                 GameLobbyStarter.instance.StartGame();
+            else if (controlledObject != null)
+                controlledObject.OnStart();
         }
     }
 }

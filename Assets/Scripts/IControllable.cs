@@ -9,8 +9,8 @@ namespace FiveXT.Core
     {
         void OnMove(InputValue value);
         void OnAim(InputValue value);
-        void Action1();
-        void Action2();
+        void OnAction1();
+        void OnAction2();
         void OnStart();
     }
 }

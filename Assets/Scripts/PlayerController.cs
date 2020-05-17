@@ -8,12 +8,22 @@ namespace FiveXT.Core
     public class PlayerController : MonoBehaviour, IControllable
     {
         [HideInInspector] public int playerNum;
-        [HideInInspector] public List<IControllable> controlledObjects = new List<IControllable>();
+        private List<IControllable> controlledObjects = new List<IControllable>();
 
         void Awake()
         {
             PlayerControllerManager.instance.RegisterPlayer(this);
             transform.SetParent(PlayerControllerManager.instance.transform);
+        }
+
+        public void AddControlledObject(IControllable controlledObject)
+        {
+            controlledObjects.Add(controlledObject);
+        }
+
+        public void RemoveControlledObject(IControllable controlledObject)
+        {
+            controlledObjects.Remove(controlledObject);
         }
 
         public void OnMove(InputValue value)

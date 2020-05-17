@@ -44,7 +44,12 @@ namespace FiveXT.Core
 
         public void RegisterControllable(IControllable controller, int playerNum)
         {
-            players[playerNum].controlledObjects.Add(controller);
+            players[playerNum].AddControlledObject(controller);
+        }
+
+        public void DeregisterControllable(IControllable controller, int playerNum)
+        {
+            players[playerNum].RemoveControlledObject(controller);
         }
 
         public bool AreAllPlayersReady()

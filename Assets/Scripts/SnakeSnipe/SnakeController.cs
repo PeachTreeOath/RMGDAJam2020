@@ -58,6 +58,11 @@ namespace FiveXT.SnakeSnipe
             }
         }
 
+        private void OnDestroy()
+        {
+            PlayerControllerManager.instance.DeregisterControllable(this, playerNum);
+        }
+
         // Update is called once per frame
         void FixedUpdate()
         {

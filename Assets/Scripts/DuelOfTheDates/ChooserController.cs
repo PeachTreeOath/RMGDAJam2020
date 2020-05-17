@@ -33,6 +33,11 @@ namespace FiveXT.DuelOfTheDates
             transform.Translate(new Vector2(h, v));
         }
 
+        private void OnDestroy()
+        {
+            PlayerControllerManager.instance.DeregisterControllable(this, playerNum);
+        }
+
         public void OnMove(InputValue value)
         {
             if (!GameManager_DuelOfTheDates.instance.IsGamePlayable()) return;

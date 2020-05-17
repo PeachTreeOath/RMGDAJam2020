@@ -36,6 +36,7 @@ namespace FiveXT.Core
                     listener.GameStart();
 
                 countdownText.enabled = false;
+                isCountingDown = false;
             }
         }
 

@@ -8,13 +8,18 @@ using Random = UnityEngine.Random;
 
 namespace FiveXT.DoubleNinjaDragonGaiden
 {
-
     public class GameManager_DoubleNinjaDragonGaiden : Singleton<GameManager_DoubleNinjaDragonGaiden>, IGameStartCountdownListener
     {
         public GameObject gameOverCanvas;
         public TextMeshProUGUI winnerText;
         public ScoreWidget p1ScoreIcon;
         public ScoreWidget p2ScoreIcon;
+        public NinjaController ninja1;
+        public NinjaController ninja2;
+        public CloneController clone1;
+        public CloneController clone2;
+        public GameObject p1KOObj;
+        public GameObject p2KOObj;
 
         [HideInInspector] public bool isGameStarted;
         [HideInInspector] public bool isGameOver;
@@ -27,7 +32,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         {
             GameStartCountdown.instance.RegisterListener(this);
 
-  
+
             GotoNextRound();
 
         }
@@ -36,11 +41,14 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         {
             if (!IsGamePlayable()) return;
 
-          
+
         }
 
         public void GameStart()
         {
+            clone1.ThrowSmokeBomb();
+            clone2.ThrowSmokeBomb();
+
             isGameStarted = true;
         }
 
@@ -74,6 +82,19 @@ namespace FiveXT.DoubleNinjaDragonGaiden
             }
 
             SetScoreIcons();
+        }
+
+        public void OnNinjaDeath(int playerNum)
+        {
+
+        }
+
+        public void OnCloneDeath(int playerNum)
+        {
+            if (playerNum == 0)
+                clone1.gameObject.SetActive(false);
+            else
+                clone2.gameObject.SetActive(false);
         }
 
         private void SetScoreIcons()

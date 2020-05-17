@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6593042932204523497}
   - component: {fileID: 4082412910302810616}
   m_Layer: 0
-  m_Name: Heart3
+  m_Name: Icon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8574313412237123843}
   - component: {fileID: 5941569085888831651}
   m_Layer: 0
-  m_Name: Heart2
+  m_Name: Icon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 8318592100216421098}
   - component: {fileID: 1816123143613693975}
   m_Layer: 0
-  m_Name: Heart5
+  m_Name: Icon5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 2799423016278988756}
   - component: {fileID: 963934664124849256}
   m_Layer: 0
-  m_Name: Heart4
+  m_Name: Icon4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 4376957758623992311}
   - component: {fileID: 3202580389036120138}
   m_Layer: 0
-  m_Name: Heart1
+  m_Name: Icon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 5842088957196082392}
   - component: {fileID: 5018653989219453176}
   m_Layer: 0
-  m_Name: HeartWidget
+  m_Name: ScoreWidget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,9 +453,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8d6b2d84e22544782211fbae357cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heart1: {fileID: 3202580389036120138}
-  heart2: {fileID: 5941569085888831651}
-  heart3: {fileID: 4082412910302810616}
-  heart4: {fileID: 963934664124849256}
-  heart5: {fileID: 1816123143613693975}
-  fullHeart: {fileID: 21300000, guid: d1c619982b4e02c4692d45a55f40c997, type: 3}
+  icon1: {fileID: 3202580389036120138}
+  icon2: {fileID: 5941569085888831651}
+  icon3: {fileID: 4082412910302810616}
+  icon4: {fileID: 963934664124849256}
+  icon5: {fileID: 1816123143613693975}
+  fullIcon: {fileID: 0}

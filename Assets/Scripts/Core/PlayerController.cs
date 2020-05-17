@@ -33,7 +33,7 @@ namespace FiveXT.Core
 
         public void OnAim(InputValue value)
         {
-            controlledObjects.ForEach(o => o.OnMove(value));
+            controlledObjects.ForEach(o => o.OnAim(value));
         }
 
         public void OnAction1()

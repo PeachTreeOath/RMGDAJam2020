@@ -12,8 +12,15 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public int playerNum;
         public float moveSpeed;
         public SpriteRenderer spr;
+        public GameObject slashObject;
+        public float attackDuration;
 
         private Vector2 movementInput;
+        private Vector2 attackVector;
+        private float attackTimeElapsed;
+
+        private bool isAttacking;
+        private bool isDead;
 
         private void Start()
         {
@@ -23,17 +30,41 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
+            if (isDead) return;
 
-            float h = movementInput.x * Time.fixedDeltaTime * moveSpeed;
-            float v = movementInput.y * Time.fixedDeltaTime * moveSpeed;
+            if (isAttacking)
+            {
+                attackTimeElapsed += Time.fixedDeltaTime;
 
-            transform.Translate(new Vector2(h, v));
+                float h = attackVector.x * Time.fixedDeltaTime * EaseOutQuart(moveSpeed * 5, 0, attackTimeElapsed / attackDuration);
+                float v = attackVector.y * Time.fixedDeltaTime * EaseOutQuart(moveSpeed * 5, 0, attackTimeElapsed / attackDuration);
 
-            if (h > 0)
-                spr.flipX = true;
+                transform.Translate(new Vector2(h, v));
+
+                if (attackTimeElapsed > attackDuration)
+                {
+                    isAttacking = false;
+                    slashObject.SetActive(false);
+                }
+            }
             else
-                spr.flipX = false;
+            {
+                if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
+
+                float h = movementInput.x * Time.fixedDeltaTime * moveSpeed;
+                float v = movementInput.y * Time.fixedDeltaTime * moveSpeed;
+
+                transform.Translate(new Vector2(h, v));
+
+                if (h > 0)
+                    spr.flipX = true;
+                else if (h < 0)
+                    spr.flipX = false;
+
+                // Save off last attack direction
+                if (h != 0 && v != 0)
+                    attackVector = movementInput;
+            }
         }
 
         private void OnDestroy()
@@ -49,6 +80,8 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
         public void OnAim(InputValue value)
         {
+            if (isDead) return;
+
             if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
 
             movementInput = value.Get<Vector2>();
@@ -71,13 +104,66 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
         public void OnRightTriggerAction()
         {
-            // ATTACK
+            if (isDead) return;
+
+            if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
+
+            if (isAttacking) return;
+
+            if (attackVector == Vector2.zero)
+            {
+                if (playerNum == 0)
+                    attackVector = new Vector2(1, 0);
+                else
+                    attackVector = new Vector2(-1, 0);
+            }
+
+            float h = attackVector.x;
+            float v = attackVector.y;
+
+            slashObject.SetActive(true);
+
+            Vector2 facingVector = new Vector2(h, v).normalized;
+            slashObject.transform.localPosition = facingVector * 0.125f;
+            float angle = Mathf.Atan2(facingVector.y, facingVector.x) * Mathf.Rad2Deg;
+            slashObject.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+            attackTimeElapsed = 0;
+            isAttacking = true;
         }
 
         public void OnStart()
         {
             if (GameManager_DoubleNinjaDragonGaiden.instance.isGameOver)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (isDead) return;
+
+            if (collision.tag.Equals("Slash") && collision.GetComponentInParent<NinjaController>().playerNum != playerNum)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            isDead = true;
+        }
+
+        public void Revive()
+        {
+            isDead = false;
+            isAttacking = false;
+        }
+
+        private float EaseOutQuart(float start, float end, float value)
+        {
+            value--;
+            end -= start;
+            return -end * (value * value * value * value - 1) + start;
         }
     }
 }

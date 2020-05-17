@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Body
   - Tail
+  - Slash
   layers:
   - Default
   - TransparentFX

@@ -12,18 +12,42 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public int playerNum;
         public float moveSpeed;
         public SpriteRenderer spr;
+        public GameObject smokePrefab;
+        public GameObject deathPrefab;
+        public float smokeBombCooldownTime;
+        public SmokeBombMeter smokeBombMeter;
 
+        private float smokeBombTimeElapsed;
+        private bool isDead;
         private Vector2 movementInput;
 
         private void Start()
         {
+            smokeBombTimeElapsed = smokeBombCooldownTime;
+        }
+
+        private void OnEnable()
+        {
             PlayerControllerManager.instance.RegisterControllable(this, playerNum);
+        }
+
+        void Update()
+        {
+            if (isDead) return;
+
+            if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
+
+            smokeBombMeter.SetProgress(smokeBombTimeElapsed / smokeBombCooldownTime);
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (isDead) return;
+
             if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
+
+            smokeBombTimeElapsed += Time.fixedDeltaTime;
 
             float h = movementInput.x * Time.fixedDeltaTime * moveSpeed;
             float v = movementInput.y * Time.fixedDeltaTime * moveSpeed;
@@ -36,13 +60,15 @@ namespace FiveXT.DoubleNinjaDragonGaiden
                 spr.flipX = false;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             PlayerControllerManager.instance.DeregisterControllable(this, playerNum);
         }
 
         public void OnMove(InputValue value)
         {
+            if (isDead) return;
+
             if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
 
             movementInput = value.Get<Vector2>();
@@ -65,7 +91,11 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
         public void OnLeftTriggerAction()
         {
-            // BOMB
+            if (isDead) return;
+
+            if (!GameManager_DoubleNinjaDragonGaiden.instance.IsGamePlayable()) return;
+
+            ThrowSmokeBomb();
         }
 
         public void OnRightTriggerAction()
@@ -76,6 +106,40 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public void OnStart()
         {
             // Do nothing
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (isDead) return;
+
+            if (collision.tag.Equals("Slash") && collision.GetComponentInParent<NinjaController>().playerNum != playerNum)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            GameObject death = Instantiate(deathPrefab);
+
+            spr.enabled = false;
+            isDead = true;
+        }
+
+        public void Revive()
+        {
+            spr.enabled = true;
+            isDead = false;
+        }
+
+        public void ThrowSmokeBomb()
+        {
+            if (smokeBombTimeElapsed >= smokeBombCooldownTime)
+            {
+                GameObject smoke = Instantiate(smokePrefab);
+                smoke.transform.position = transform.position;
+                smokeBombTimeElapsed = 0;
+            }
         }
     }
 }

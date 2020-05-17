@@ -1,8 +1,10 @@
 ﻿using FiveXT.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FiveXT.DuelOfTheDates
 {
@@ -11,6 +13,7 @@ namespace FiveXT.DuelOfTheDates
         INVESTIGATING,
         TRANSITIONING_TO_ANSWERING,
         ANSWERING,
+        SHOW_ANSWER,
         TRANSITIONING_TO_INVESTIGATING
     }
 
@@ -28,6 +31,8 @@ namespace FiveXT.DuelOfTheDates
         public TextMeshProUGUI investigationTimer;
         public TextMeshProUGUI interviewTimer;
         public GameObject interviewObject;
+        public GameObject p1CorrectObj;
+        public GameObject p2CorrectObj;
 
         [HideInInspector] public bool isGameStarted;
         [HideInInspector] public bool isGameOver;
@@ -40,9 +45,10 @@ namespace FiveXT.DuelOfTheDates
         private int p2Points;
 
         private float phaseTimeElapsed;
-        private float investigationPhaseDuration = 1;
+        private float investigationPhaseDuration = 10;
         private float transitionToAnsweringPhaseDuration = 3;
         private float answeringPhaseDuration = 10;
+        private float showAnswerPhaseDuration = 2;
         private float transitionToInvestigationPhaseDuration = 3;
 
         private DateView selectedDate;
@@ -62,6 +68,8 @@ namespace FiveXT.DuelOfTheDates
 
             phase = GamePhase.INVESTIGATING;
             GotoNextRound();
+
+            //GameStart(); //TEMPTEMPTEMPTEPM
         }
 
         private void Update()
@@ -72,12 +80,14 @@ namespace FiveXT.DuelOfTheDates
 
             if (phase == GamePhase.INVESTIGATING)
             {
-                //update timer
+                // Update timer
+                investigationTimer.text = ((int)(investigationPhaseDuration - phaseTimeElapsed) + 1).ToString();
 
                 if (phaseTimeElapsed > investigationPhaseDuration)
                 {
                     selectedDate = dates[Random.Range(0, dates.Count)];
                     selectedOrigPos = selectedDate.transform.position;
+                    investigationTimer.text = "";
 
                     phaseTimeElapsed = 0;
                     phase = GamePhase.TRANSITIONING_TO_ANSWERING;
@@ -88,14 +98,14 @@ namespace FiveXT.DuelOfTheDates
                 // Move players back and move date to interview position
 
                 selectedDate.transform.position = Vector2.Lerp(selectedOrigPos, interviewPosition, phaseTimeElapsed / transitionToAnsweringPhaseDuration);
-                p1Dater.transform.position = Vector2.Lerp(p1Dater.transform.position, p1DaterOrigPos, (phaseTimeElapsed * 2) / transitionToAnsweringPhaseDuration);
-                p2Dater.transform.position = Vector2.Lerp(p2Dater.transform.position, p2DaterOrigPos, (phaseTimeElapsed * 2) / transitionToAnsweringPhaseDuration);
+                p1Dater.transform.position = Vector2.Lerp(p1Dater.transform.position, p1DaterOrigPos, phaseTimeElapsed / transitionToAnsweringPhaseDuration);
+                p2Dater.transform.position = Vector2.Lerp(p2Dater.transform.position, p2DaterOrigPos, phaseTimeElapsed / transitionToAnsweringPhaseDuration);
 
                 if (phaseTimeElapsed > transitionToAnsweringPhaseDuration)
                 {
                     interviewObject.SetActive(true);
                     InterviewView.instance.InitInterview(selectedDate.model, infoUsed[Random.Range(0, infoUsed.Count)]);
-                    selectedDate.GetComponent<SpriteRenderer>().sortingLayerName = "Interview";
+                    selectedDate.ChangeToSpriteLayer("Interview");
 
                     phaseTimeElapsed = 0;
                     phase = GamePhase.ANSWERING;
@@ -103,11 +113,28 @@ namespace FiveXT.DuelOfTheDates
             }
             else if (phase == GamePhase.ANSWERING)
             {
-                //update timer
+                // Update timer
+                interviewTimer.text = ((int)(answeringPhaseDuration - phaseTimeElapsed) + 1).ToString();
 
                 if (phaseTimeElapsed > answeringPhaseDuration)
                 {
-                    selectedDate.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+                    interviewTimer.text = "";
+
+                    phaseTimeElapsed = 0;
+                    phase = GamePhase.SHOW_ANSWER;
+                }
+            }
+            else if (phase == GamePhase.SHOW_ANSWER)
+            {
+                // Do nothing, just show answer
+
+                if (phaseTimeElapsed > showAnswerPhaseDuration)
+                {
+                    interviewObject.SetActive(false);
+                    selectedDate.ChangeToSpriteLayer("Default");
+                    p1CorrectObj.SetActive(false);
+                    p2CorrectObj.SetActive(false);
+                    GotoNextRound();
 
                     phaseTimeElapsed = 0;
                     phase = GamePhase.TRANSITIONING_TO_INVESTIGATING;
@@ -115,12 +142,18 @@ namespace FiveXT.DuelOfTheDates
             }
             else if (phase == GamePhase.TRANSITIONING_TO_INVESTIGATING)
             {
+                // Move date back
+                selectedDate.transform.position = Vector2.Lerp(interviewPosition, selectedOrigPos, phaseTimeElapsed / transitionToInvestigationPhaseDuration);
 
                 if (phaseTimeElapsed > transitionToInvestigationPhaseDuration)
                 {
-
                     phaseTimeElapsed = 0;
                     phase = GamePhase.INVESTIGATING;
+
+                    if (p1Points == 5)
+                        GameOver(0);
+                    else if (p2Points == 5)
+                        GameOver(1);
                 }
             }
         }
@@ -156,26 +189,49 @@ namespace FiveXT.DuelOfTheDates
                     UnlockNewInfo(0);
                     break;
                 case 2:
-                    DateView date3 = CreateDate();
-                    date3.transform.position = datePositions[0];
+                    UnlockNewInfo();
                     break;
                 case 3:
-                    UnlockNewInfo();
+                    DateView date3 = CreateDate();
+                    date3.transform.position = datePositions[0];
+                    UpdateInfo();
                     break;
                 case 4:
-                    DateView date4 = CreateDate();
-                    date4.transform.position = datePositions[3];
-                    break;
-                case 5:
                     UnlockNewInfo();
                     break;
+                case 5:
+                    DateView date4 = CreateDate();
+                    date4.transform.position = datePositions[3];
+                    UpdateInfo();
+                    break;
                 case 6:
+                    UnlockNewInfo();
+                    break;
+                case 7:
                     DateView date5 = CreateDate();
                     date5.transform.position = datePositions[4];
+                    UpdateInfo();
                     break;
                 default:
                     break;
             }
+        }
+
+        public void ScorePoint(int playerNum)
+        {
+            if (playerNum == 0)
+            {
+                p1Points++;
+                p1CorrectObj.SetActive(true);
+            }
+            else if (playerNum == 1)
+            {
+                p2Points++;
+                p2CorrectObj.SetActive(true);
+            }
+
+            SetHearts();
+            phaseTimeElapsed = answeringPhaseDuration;
         }
 
         private DateView CreateDate()
@@ -223,6 +279,11 @@ namespace FiveXT.DuelOfTheDates
         {
             infoUsed.Add(infoType);
 
+            UpdateInfo();
+        }
+
+        private void UpdateInfo()
+        {
             foreach (DateView dates in dates)
             {
                 dates.ChangeDialogue(infoUsed);

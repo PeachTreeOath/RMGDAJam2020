@@ -1,24 +1,28 @@
 ﻿using FiveXT.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FiveXT.DuelOfTheDates
 {
     public class InterviewView : Singleton<InterviewView>
     {
         public TextMeshProUGUI question;
-        public List<AnswerView> answers;
+        public List<AnswerView> answerViews;
 
         [HideInInspector] public int p1SelectedAnswer;
         [HideInInspector] public int p2SelectedAnswer;
 
         private int currentCorrectAnswer;
+        private bool p1Locked;
+        private bool p2Locked;
 
         public void ClearAnswers()
         {
-            foreach (AnswerView view in answers)
+            foreach (AnswerView view in answerViews)
             {
                 view.P1Deselected();
                 view.P2Deselected();
@@ -27,12 +31,16 @@ namespace FiveXT.DuelOfTheDates
 
         public void SetAnswers()
         {
-            answers[p1SelectedAnswer].P1Selected();
-            answers[p2SelectedAnswer].P2Selected();
+            answerViews[p1SelectedAnswer].P1Selected();
+            answerViews[p2SelectedAnswer].P2Selected();
         }
 
         public void InitInterview(DateModel model, int infoType)
         {
+            answerViews.ForEach(o => o.ClearMarks());
+            p1Locked = false;
+            p2Locked = false;
+
             ClearAnswers();
             p1SelectedAnswer = 3;
             p2SelectedAnswer = 3;
@@ -74,7 +82,7 @@ namespace FiveXT.DuelOfTheDates
                 case 5:
                     correctAnswer = model.movie;
                     answersUsed.Add(model.movieIdx);
-                    question.text = "What is my fave movie?";
+                    question.text = "What is my favorite movie?";
                     break;
             }
 
@@ -125,13 +133,13 @@ namespace FiveXT.DuelOfTheDates
 
         public void MoveAnswerUp(int playerNum)
         {
-            if (playerNum == 0)
+            if (playerNum == 0 && !p1Locked)
             {
                 p1SelectedAnswer--;
                 if (p1SelectedAnswer == -1)
                     p1SelectedAnswer = 7;
             }
-            else
+            else if (playerNum == 1 && !p2Locked)
             {
                 p2SelectedAnswer--;
                 if (p2SelectedAnswer == -1)
@@ -144,13 +152,13 @@ namespace FiveXT.DuelOfTheDates
 
         public void MoveAnswerDown(int playerNum)
         {
-            if (playerNum == 0)
+            if (playerNum == 0 && !p1Locked)
             {
                 p1SelectedAnswer++;
                 if (p1SelectedAnswer == 8)
                     p1SelectedAnswer = 0;
             }
-            else
+            else if (playerNum == 1 && !p2Locked)
             {
                 p2SelectedAnswer++;
                 if (p2SelectedAnswer == 8)
@@ -159,6 +167,43 @@ namespace FiveXT.DuelOfTheDates
 
             ClearAnswers();
             SetAnswers();
+        }
+
+        public void SelectAnswer(int playerNum)
+        {
+            if (playerNum == 0 && !p1Locked)
+            {
+                if (p1SelectedAnswer == currentCorrectAnswer)
+                {
+                    GameManager_DuelOfTheDates.instance.ScorePoint(playerNum);
+                    answerViews[p1SelectedAnswer].P1Correct();
+                    p2Locked = true; // Lock other player's controls as well
+                }
+                else
+                {
+                    answerViews[p1SelectedAnswer].P1Wrong();
+                }
+                // Disable controls
+                p1Locked = true;
+            }
+            else if (playerNum == 1 && !p2Locked)
+            {
+                if (p2SelectedAnswer == currentCorrectAnswer)
+                {
+                    GameManager_DuelOfTheDates.instance.ScorePoint(playerNum);
+                    answerViews[p2SelectedAnswer].P2Correct();
+                    p1Locked = true; // Lock other player's controls as well
+                }
+                else
+                {
+                    answerViews[p2SelectedAnswer].P2Wrong();
+                }
+                // Disable controls
+                p2Locked = true;
+            }
+
+            if (p1Locked && p2Locked)
+                GameManager_DuelOfTheDates.instance.ScorePoint(-1); // Go to next round on double fail
         }
 
         private int GetUnusedAnswer(List<int> answersUsed, int numAnswers)
@@ -182,7 +227,7 @@ namespace FiveXT.DuelOfTheDates
             }
             while (choicesUsed.Contains(i));
 
-            answers[i].SetAnswer(answerText);
+            answerViews[i].SetAnswer(answerText);
 
             return i;
         }

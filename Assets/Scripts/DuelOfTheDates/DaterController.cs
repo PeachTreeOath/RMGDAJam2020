@@ -14,6 +14,11 @@ namespace FiveXT.DuelOfTheDates
 
         private Vector2 movementInput;
 
+        private void Start()
+        {
+            PlayerControllerManager.instance.RegisterControllable(this, playerNum);
+        }
+
         // Update is called once per frame
         void FixedUpdate()
         {
@@ -22,8 +27,8 @@ namespace FiveXT.DuelOfTheDates
             if (GameManager_DuelOfTheDates.instance.phase != GamePhase.INVESTIGATING) return;
 
 
-            float h = movementInput.x;
-            float v = movementInput.y;
+            float h = movementInput.x * Time.fixedDeltaTime * moveSpeed;
+            float v = movementInput.y * Time.fixedDeltaTime * moveSpeed;
 
             transform.Translate(new Vector2(h, v));
         }

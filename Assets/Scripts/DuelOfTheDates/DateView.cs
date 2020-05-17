@@ -10,6 +10,7 @@ namespace FiveXT.DuelOfTheDates
     {
         public GameObject infoCanvas;
         public TextMeshProUGUI infoText;
+        public SpriteRenderer bodySprite;
         public SpriteRenderer hairSprite;
         public SpriteRenderer topSprite;
         public SpriteRenderer botSprite;
@@ -43,28 +44,36 @@ namespace FiveXT.DuelOfTheDates
                 switch (info)
                 {
                     case 0:
-                        sb.Append("My name is ").Append(model.firstName);
+                        sb.Append("\"Hi, my name is ").Append(model.firstName);
                         break;
                     case 1:
-                        sb.Append("My bday is in ").Append(model.birthMonth);
+                        sb.Append("\"My bday is in ").Append(model.birthMonth);
                         break;
                     case 2:
-                        sb.Append("My hobby is ").Append(model.hobby);
+                        sb.Append("\"My hobby is ").Append(model.hobby);
                         break;
                     case 3:
-                        sb.Append("My blood type is ").Append(model.bloodType);
+                        sb.Append("\"My blood type is ").Append(model.bloodType);
                         break;
                     case 4:
-                        sb.Append("My hometown is ").Append(model.homeTown);
+                        sb.Append("\"My hometown is ").Append(model.homeTown);
                         break;
                     case 5:
-                        sb.Append("My fave movie is ").Append(model.movie);
+                        sb.Append("\"My favorite movie is ").Append(model.movie);
                         break;
                 }
-                sb.Append("\n");
+                sb.Append("\"\n");
             }
 
             infoText.text = sb.ToString();
+        }
+
+        public void ChangeToSpriteLayer(string layerName)
+        {
+            bodySprite.sortingLayerName = layerName;
+            hairSprite.sortingLayerName = layerName;
+            topSprite.sortingLayerName = layerName;
+            botSprite.sortingLayerName = layerName;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

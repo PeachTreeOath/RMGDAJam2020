@@ -533,30 +533,27 @@ PrefabInstance:
         Phase
         2: Choose the correct answer
 
-        before your opponent does
-
-        First
-        to 5 wins!'
+        before your opponent does'
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 135
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 24
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 24
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382184034825, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}

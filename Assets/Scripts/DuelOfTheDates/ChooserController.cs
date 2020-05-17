@@ -12,6 +12,13 @@ namespace FiveXT.DuelOfTheDates
         public int playerNum;
 
         private Vector2 movementInput;
+        private bool isAcceptingInput;
+        private const float threshold = 0.8f;
+
+        private void Start()
+        {
+            PlayerControllerManager.instance.RegisterControllable(this, playerNum);
+        }
 
         // Update is called once per frame
         void FixedUpdate()
@@ -30,9 +37,24 @@ namespace FiveXT.DuelOfTheDates
         {
             if (!GameManager_DuelOfTheDates.instance.IsGamePlayable()) return;
 
-            if (GameManager_DuelOfTheDates.instance.phase != GamePhase.INVESTIGATING) return;
+            if (GameManager_DuelOfTheDates.instance.phase != GamePhase.ANSWERING) return;
 
             movementInput = value.Get<Vector2>();
+
+            if (isAcceptingInput && movementInput.y > threshold)
+            {
+                InterviewView.instance.MoveAnswerUp(playerNum);
+                isAcceptingInput = false;
+            }
+            else if (isAcceptingInput && movementInput.y < -threshold)
+            {
+                InterviewView.instance.MoveAnswerDown(playerNum);
+                isAcceptingInput = false;
+            }
+            else if (movementInput.y < threshold && movementInput.y > -threshold)
+            {
+                isAcceptingInput = true;
+            }
         }
 
         public void OnAim(InputValue value)
@@ -42,7 +64,11 @@ namespace FiveXT.DuelOfTheDates
 
         public void OnAction1()
         {
-            // Do nothing
+            if (!GameManager_DuelOfTheDates.instance.IsGamePlayable()) return;
+
+            if (GameManager_DuelOfTheDates.instance.phase != GamePhase.ANSWERING) return;
+
+            InterviewView.instance.SelectAnswer(playerNum);
         }
 
         public void OnAction2()

@@ -145,8 +145,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 8f457b4bd90733046b57d28506d4afd3, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -406,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoCanvas: {fileID: 9069340073370343227}
   infoText: {fileID: 7171737215947343104}
+  bodySprite: {fileID: 9148471486319418570}
   hairSprite: {fileID: 8556234897964424814}
   topSprite: {fileID: 2669646940136668650}
   botSprite: {fileID: 1134244114686665550}
@@ -534,7 +535,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 20.7}
-  m_SizeDelta: {x: 90, y: 50}
+  m_SizeDelta: {x: 95, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2810434410097324293
 CanvasRenderer:
@@ -563,7 +564,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- My hometown is Los Angeles'
+  m_text: '"My blood type is AB positive"
+
+    "My favorite movie is Ace Ventura
+    2"
+
+    "My fave movie is Ace Ventura 2"
+
+    "My fave movie is Ace Ventura 2"'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc664ec609037e744b55a28dc85f3df3, type: 2}
   m_sharedMaterial: {fileID: -3794841578129762054, guid: cc664ec609037e744b55a28dc85f3df3,
@@ -609,7 +617,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 98
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -633,12 +641,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7171737215947343104}
-    characterCount: 28
+    characterCount: 133
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 6
+    spaceCount: 26
+    wordCount: 27
     linkCount: 0
-    lineCount: 2
+    lineCount: 7
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -674,7 +682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3302477940302856028
 RectTransform:
   m_ObjectHideFlags: 0

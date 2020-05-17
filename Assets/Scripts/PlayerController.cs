@@ -8,7 +8,7 @@ namespace FiveXT.Core
     public class PlayerController : MonoBehaviour, IControllable
     {
         [HideInInspector] public int playerNum;
-        [HideInInspector] public IControllable controlledObject;
+        [HideInInspector] public List<IControllable> controlledObjects = new List<IControllable>();
 
         void Awake()
         {
@@ -18,34 +18,30 @@ namespace FiveXT.Core
 
         public void OnMove(InputValue value)
         {
-            if (controlledObject != null)
-                controlledObject.OnMove(value);
+            controlledObjects.ForEach(o => o.OnMove(value));
         }
 
         public void OnAim(InputValue value)
         {
-            if (controlledObject != null)
-                controlledObject.OnAim(value);
+            controlledObjects.ForEach(o => o.OnMove(value));
         }
 
         public void OnAction1()
         {
-            if (controlledObject != null)
-                controlledObject.OnAction1();
+            controlledObjects.ForEach(o => o.OnAction1());
         }
 
         public void OnAction2()
         {
-            if (controlledObject != null)
-                controlledObject.OnAction2();
+            controlledObjects.ForEach(o => o.OnAction2());
         }
 
         public void OnStart()
         {
             if (GameLobbyStarter.instance != null)
                 GameLobbyStarter.instance.StartGame();
-            else if (controlledObject != null)
-                controlledObject.OnStart();
+            else
+                controlledObjects.ForEach(o => o.OnStart());
         }
     }
 }

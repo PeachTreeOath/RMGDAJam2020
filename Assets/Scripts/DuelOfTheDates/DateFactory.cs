@@ -78,14 +78,15 @@ namespace FiveXT.DuelOfTheDates
         [HideInInspector]
         public List<string> bloodTypes = new List<string>()
         {
-            "O-",
-            "O+",
-            "A-",
-            "A+",
-            "B-",
-            "B+",
-            "AB-",
-            "AB+"
+            "O negative",
+            "O positive",
+            "A negative",
+            "A positive",
+            "B negative",
+            "B positive",
+            "AB negative",
+            "AB positive",
+            "Corrosive acid"
         };
 
         [HideInInspector]

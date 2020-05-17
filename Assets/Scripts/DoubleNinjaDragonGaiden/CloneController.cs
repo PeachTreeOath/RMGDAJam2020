@@ -63,6 +63,16 @@ namespace FiveXT.DoubleNinjaDragonGaiden
             // Do nothing
         }
 
+        public void OnLeftTriggerAction()
+        {
+            // BOMB
+        }
+
+        public void OnRightTriggerAction()
+        {
+            // Do nothing
+        }
+
         public void OnStart()
         {
             // Do nothing

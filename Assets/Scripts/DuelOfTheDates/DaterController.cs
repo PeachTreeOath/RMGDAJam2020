@@ -62,6 +62,16 @@ namespace FiveXT.DuelOfTheDates
             // Do nothing
         }
 
+        public void OnLeftTriggerAction()
+        {
+            // Do nothing
+        }
+
+        public void OnRightTriggerAction()
+        {
+            // Do nothing
+        }
+
         public void OnStart()
         {
             if (GameManager_DuelOfTheDates.instance.isGameOver)

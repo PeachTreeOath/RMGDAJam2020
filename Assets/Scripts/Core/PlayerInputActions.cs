@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/PlayerInputActions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Core/PlayerInputActions.inputactions'
 
 using System;
 using System.Collections;
@@ -54,6 +54,22 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""name"": ""Start"",
                     ""type"": ""Button"",
                     ""id"": ""e4fb76c9-c28f-4d15-8294-5ed7adef5d08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LeftTriggerAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a71d337-2a7b-4f36-9092-251bc3a6943d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightTriggerAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6cc5bd7-adba-4b4f-af45-55b1940ba8e9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -238,28 +254,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7739431-ee83-4ac8-af19-6666e54ff9d4"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Action2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""82c54e35-aef4-4be4-8bf5-7357b551d8c6"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Action2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""cf7ed904-a34e-4c69-b5b2-00a1484cb00e"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
@@ -279,6 +273,50 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7739431-ee83-4ac8-af19-6666e54ff9d4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightTriggerAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82c54e35-aef4-4be4-8bf5-7357b551d8c6"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightTriggerAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0df7280-f085-402a-8d53-c606b6b7397d"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftTriggerAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f92af65-1482-4af3-af83-9ce921275248"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftTriggerAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -292,6 +330,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerControls_Action1 = m_PlayerControls.FindAction("Action1", throwIfNotFound: true);
         m_PlayerControls_Action2 = m_PlayerControls.FindAction("Action2", throwIfNotFound: true);
         m_PlayerControls_Start = m_PlayerControls.FindAction("Start", throwIfNotFound: true);
+        m_PlayerControls_LeftTriggerAction = m_PlayerControls.FindAction("LeftTriggerAction", throwIfNotFound: true);
+        m_PlayerControls_RightTriggerAction = m_PlayerControls.FindAction("RightTriggerAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -346,6 +386,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControls_Action1;
     private readonly InputAction m_PlayerControls_Action2;
     private readonly InputAction m_PlayerControls_Start;
+    private readonly InputAction m_PlayerControls_LeftTriggerAction;
+    private readonly InputAction m_PlayerControls_RightTriggerAction;
     public struct PlayerControlsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -355,6 +397,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Action1 => m_Wrapper.m_PlayerControls_Action1;
         public InputAction @Action2 => m_Wrapper.m_PlayerControls_Action2;
         public InputAction @Start => m_Wrapper.m_PlayerControls_Start;
+        public InputAction @LeftTriggerAction => m_Wrapper.m_PlayerControls_LeftTriggerAction;
+        public InputAction @RightTriggerAction => m_Wrapper.m_PlayerControls_RightTriggerAction;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -379,6 +423,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Start.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnStart;
                 @Start.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnStart;
                 @Start.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnStart;
+                @LeftTriggerAction.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftTriggerAction;
+                @LeftTriggerAction.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftTriggerAction;
+                @LeftTriggerAction.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftTriggerAction;
+                @RightTriggerAction.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightTriggerAction;
+                @RightTriggerAction.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightTriggerAction;
+                @RightTriggerAction.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightTriggerAction;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -398,6 +448,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Start.started += instance.OnStart;
                 @Start.performed += instance.OnStart;
                 @Start.canceled += instance.OnStart;
+                @LeftTriggerAction.started += instance.OnLeftTriggerAction;
+                @LeftTriggerAction.performed += instance.OnLeftTriggerAction;
+                @LeftTriggerAction.canceled += instance.OnLeftTriggerAction;
+                @RightTriggerAction.started += instance.OnRightTriggerAction;
+                @RightTriggerAction.performed += instance.OnRightTriggerAction;
+                @RightTriggerAction.canceled += instance.OnRightTriggerAction;
             }
         }
     }
@@ -409,5 +465,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnAction1(InputAction.CallbackContext context);
         void OnAction2(InputAction.CallbackContext context);
         void OnStart(InputAction.CallbackContext context);
+        void OnLeftTriggerAction(InputAction.CallbackContext context);
+        void OnRightTriggerAction(InputAction.CallbackContext context);
     }
 }

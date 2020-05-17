@@ -46,6 +46,16 @@ namespace FiveXT.Core
             controlledObjects.ForEach(o => o.OnAction2());
         }
 
+        public void OnLeftTriggerAction()
+        {
+            controlledObjects.ForEach(o => o.OnLeftTriggerAction());
+        }
+
+        public void OnRightTriggerAction()
+        {
+            controlledObjects.ForEach(o => o.OnRightTriggerAction());
+        }
+
         public void OnStart()
         {
             if (GameLobbyStarter.instance != null)

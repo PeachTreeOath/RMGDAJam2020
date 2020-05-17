@@ -64,6 +64,16 @@ namespace FiveXT.DoubleNinjaDragonGaiden
             // Do nothing
         }
 
+        public void OnLeftTriggerAction()
+        {
+            // Do nothing
+        }
+
+        public void OnRightTriggerAction()
+        {
+            // ATTACK
+        }
+
         public void OnStart()
         {
             if (GameManager_DoubleNinjaDragonGaiden.instance.isGameOver)

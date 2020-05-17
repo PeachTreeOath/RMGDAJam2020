@@ -11,6 +11,8 @@ namespace FiveXT.Core
         void OnAim(InputValue value);
         void OnAction1();
         void OnAction2();
+        void OnLeftTriggerAction();
+        void OnRightTriggerAction();
         void OnStart();
     }
 }

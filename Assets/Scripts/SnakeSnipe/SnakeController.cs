@@ -146,6 +146,16 @@ namespace FiveXT.SnakeSnipe
             // Do nothing
         }
 
+        public void OnLeftTriggerAction()
+        {
+            // Do nothing
+        }
+
+        public void OnRightTriggerAction()
+        {
+            // Do nothing
+        }
+
         public void OnStart()
         {
             if (GameManager_SnakeSnipe.instance.isGameOver)

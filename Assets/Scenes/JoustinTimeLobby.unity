@@ -324,7 +324,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.6128455, g: 0.3285422, b: 0.6509434, a: 0}
+  m_BackGroundColor: {r: 0.20803666, g: 0.48251864, b: 0.5188679, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -526,7 +526,7 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_text
-      value: 'LS walk / A choose
+      value: 'L-Stick walk / A choose
 
         Phase 1: Memorize the girls'' info
 
@@ -538,7 +538,7 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 113
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
@@ -668,22 +668,22 @@ PrefabInstance:
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_text
-      value: Duel of the Dates
+      value: Joustin' Time
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 17
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6532621383120392869, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}

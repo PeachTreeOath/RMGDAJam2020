@@ -26,8 +26,8 @@ namespace FiveXT.DuelOfTheDates
         public Vector2 interviewPosition;
         public Transform p1Dater;
         public Transform p2Dater;
-        public HeartWidget p1Hearts;
-        public HeartWidget p2Hearts;
+        public ScoreWidget p1Hearts;
+        public ScoreWidget p2Hearts;
         public TextMeshProUGUI investigationTimer;
         public TextMeshProUGUI interviewTimer;
         public GameObject interviewObject;
@@ -68,8 +68,6 @@ namespace FiveXT.DuelOfTheDates
 
             phase = GamePhase.INVESTIGATING;
             GotoNextRound();
-
-            //GameStart(); //TEMPTEMPTEMPTEPM
         }
 
         private void Update()
@@ -292,8 +290,8 @@ namespace FiveXT.DuelOfTheDates
 
         private void SetHearts()
         {
-            p1Hearts.SetHeartCount(p1Points);
-            p2Hearts.SetHeartCount(p2Points);
+            p1Hearts.SetIconCount(p1Points);
+            p2Hearts.SetIconCount(p2Points);
         }
     }
 }

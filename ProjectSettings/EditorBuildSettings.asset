@@ -17,4 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DuelOfTheDates.unity
     guid: a0405e278e0339141b706fb5b48d609f
+  - enabled: 1
+    path: Assets/Scenes/DoubleNinjaDragonGaidenLobby.unity
+    guid: 2ed89da2be594cf4c929f2cc8dc6f537
+  - enabled: 1
+    path: Assets/Scenes/DoubleNinjaDragonGaiden.unity
+    guid: 98eb954b768abda41b0ee89913f5b68e
+  - enabled: 1
+    path: Assets/Scenes/JoustinTimeLobby.unity
+    guid: 73c9c455999d4e841b1b3321b15a2ad0
+  - enabled: 1
+    path: Assets/Scenes/JoustinTime.unity
+    guid: 0ed92fbabe2cf274ea3227cb33ec67f3
   m_configObjects: {}

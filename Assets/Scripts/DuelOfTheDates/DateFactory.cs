@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using FiveXT.Core;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace FiveXT.DuelOfTheDates
 {
-    public class DateFactory : MonoBehaviour
+    public class DateFactory : Singleton<DateFactory>
     {
-
-        private List<string> firstNames = new List<string>()
+        [HideInInspector]
+        public List<string> firstNames = new List<string>()
         {
             "Abby",
             "Bernie",
@@ -37,7 +38,8 @@ namespace FiveXT.DuelOfTheDates
             "Zeta",
         };
 
-        private List<string> birthMonths = new List<string>()
+        [HideInInspector]
+        public List<string> birthMonths = new List<string>()
         {
             "January",
             "February",
@@ -53,7 +55,8 @@ namespace FiveXT.DuelOfTheDates
             "December"
         };
 
-        private List<string> hobbies = new List<string>()
+        [HideInInspector]
+        public List<string> hobbies = new List<string>()
         {
             "Hiking",
             "Skiing",
@@ -72,15 +75,21 @@ namespace FiveXT.DuelOfTheDates
             "Mahjong"
         };
 
-        private List<string> bloodTypes = new List<string>()
+        [HideInInspector]
+        public List<string> bloodTypes = new List<string>()
         {
-            "O",
-            "A",
-            "B",
-            "AB"
+            "O-",
+            "O+",
+            "A-",
+            "A+",
+            "B-",
+            "B+",
+            "AB-",
+            "AB+"
         };
 
-        private List<string> homeTowns = new List<string>()
+        [HideInInspector]
+        public List<string> homeTowns = new List<string>()
         {
             "New York",
             "Los Angeles",
@@ -104,7 +113,8 @@ namespace FiveXT.DuelOfTheDates
             "Colorado Springs"
         };
 
-        private List<string> movies = new List<string>()
+        [HideInInspector]
+        public List<string> movies = new List<string>()
         {
             "Ace Ventura",
             "Ace Ventura 2",
@@ -120,17 +130,69 @@ namespace FiveXT.DuelOfTheDates
             "Sonic the Hedgehog"
         };
 
+        [HideInInspector] public Color redColor;
+        [HideInInspector] public Color orangeColor;
+        [HideInInspector] public Color yellowColor;
+        [HideInInspector] public Color greenColor;
+        [HideInInspector] public Color blueColor;
+        [HideInInspector] public Color purpleColor;
+        [HideInInspector] public Color blackColor;
+
+        [HideInInspector] public Dictionary<int, Color> colorMap = new Dictionary<int, Color>();
+
+        private void Start()
+        {
+            redColor = new Color();
+            ColorUtility.TryParseHtmlString("#A12A1F", out redColor);
+            orangeColor = new Color();
+            ColorUtility.TryParseHtmlString("#A26D20", out orangeColor);
+            yellowColor = new Color();
+            ColorUtility.TryParseHtmlString("#FFFD4E", out yellowColor);
+            greenColor = new Color();
+            ColorUtility.TryParseHtmlString("#4ECF75", out greenColor);
+            blueColor = new Color();
+            ColorUtility.TryParseHtmlString("#269ABA", out blueColor);
+            purpleColor = new Color();
+            ColorUtility.TryParseHtmlString("#823E8C", out purpleColor);
+            blackColor = new Color();
+            ColorUtility.TryParseHtmlString("#76606F", out blackColor);
+
+            colorMap[0] = redColor;
+            colorMap[1] = orangeColor;
+            colorMap[2] = yellowColor;
+            colorMap[3] = greenColor;
+            colorMap[4] = blueColor;
+            colorMap[5] = purpleColor;
+            colorMap[6] = blackColor;
+        }
+
         public DateModel CreateRandomModel()
         {
             DateModel model = new DateModel();
-            //TODO: Fill out appearance and make sure you dont accidentally create an identical looking character
+            model.hairType = Random.Range(0, 3);
+            model.hairColor = Random.Range(0, colorMap.Count);
+            model.topType = Random.Range(0, 1);
+            model.topColor = Random.Range(0, colorMap.Count);
+            model.botType = Random.Range(0, 2);
+            model.botColor = Random.Range(0, colorMap.Count);
 
-            model.firstName = firstNames[Random.Range(0, firstNames.Count)];
-            model.birthMonth = birthMonths[Random.Range(0, birthMonths.Count)];
-            model.hobby = hobbies[Random.Range(0, hobbies.Count)];
-            model.bloodType = bloodTypes[Random.Range(0, bloodTypes.Count)];
-            model.homeTown = homeTowns[Random.Range(0, homeTowns.Count)];
-            model.movie = movies[Random.Range(0, movies.Count)];
+            model.firstNameIdx = Random.Range(0, firstNames.Count);
+            model.firstName = firstNames[model.firstNameIdx];
+
+            model.birthMonthIdx = Random.Range(0, birthMonths.Count);
+            model.birthMonth = birthMonths[model.birthMonthIdx];
+
+            model.hobbyIdx = Random.Range(0, hobbies.Count);
+            model.hobby = hobbies[model.hobbyIdx];
+
+            model.bloodTypeIdx = Random.Range(0, bloodTypes.Count);
+            model.bloodType = bloodTypes[model.bloodTypeIdx];
+
+            model.homeTownIdx = Random.Range(0, homeTowns.Count);
+            model.homeTown = homeTowns[model.homeTownIdx];
+
+            model.movieIdx = Random.Range(0, movies.Count);
+            model.movie = movies[model.movieIdx];
 
             return model;
         }

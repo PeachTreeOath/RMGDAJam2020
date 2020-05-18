@@ -33,6 +33,8 @@ namespace FiveXT.JoustDoIt
         public TextMeshProUGUI p1CashText;
         public TextMeshProUGUI p2CashText;
         public GameObject shopObject;
+        public Sand p1Sand;
+        public Sand p2Sand;
 
         [HideInInspector] public bool isGameStarted;
         [HideInInspector] public bool isGameOver;
@@ -71,6 +73,8 @@ namespace FiveXT.JoustDoIt
                 {
                     p1Lance.ShowLance();
                     p2Lance.ShowLance();
+                    p1Sand.Deactivate();
+                    p2Sand.Deactivate();
 
                     phaseTimeElapsed = 0;
                     phase = GamePhase.JOUST_PAUSE;
@@ -135,6 +139,11 @@ namespace FiveXT.JoustDoIt
         {
             phaseTimeElapsed = 0;
             phase = GamePhase.JOUSTING;
+
+            if (p1BoughtItems.Contains(0))
+                p2Sand.Activate();
+            if (p2BoughtItems.Contains(0))
+                p1Sand.Activate();
         }
 
         public void GameOver(int playerNum)

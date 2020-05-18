@@ -45,8 +45,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Knight2
+    uniqueID: 115448533
+    locked: 0
   - name: UI
     uniqueID: 78114921
+    locked: 0
+  - name: Results
+    uniqueID: 1248167631
     locked: 0
   - name: Interview
     uniqueID: 735908133

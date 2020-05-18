@@ -138,6 +138,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
             logSpr.enabled = false;
             isDead = false;
             smokeBombMeter.SetProgress(0);
+            movementInput = Vector2.zero;
         }
 
         public void ResetSmokeMeter()

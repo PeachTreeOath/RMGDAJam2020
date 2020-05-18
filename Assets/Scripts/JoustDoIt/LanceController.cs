@@ -36,15 +36,15 @@ namespace FiveXT.JoustDoIt
             if (GameManager_JoustDoIt.instance.phase != GamePhase.JOUSTING) return;
 
             float tempBobRadius = bobRadius;
-            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(2)) // Beer
-                tempBobRadius *= 1.5f;
-            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(2)) // Beer
-                tempBobRadius *= 1.5f;
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(5)) // Beer
+                tempBobRadius *= 2f;
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(5)) // Beer
+                tempBobRadius *= 2f;
 
             float tempBobSpeed = bobSpeed;
-            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(4)) // Angry horse
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(3)) // Angry horse
                 tempBobSpeed *= 2f;
-            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(4)) // Angry horse
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(3)) // Angry horse
                 tempBobSpeed *= 2f;
 
             float px = Time.time * tempBobSpeed + (playerNum * 10000);
@@ -63,23 +63,23 @@ namespace FiveXT.JoustDoIt
             float h = movementInput.x * Time.fixedDeltaTime * moveSpeed;
             float v = movementInput.y * Time.fixedDeltaTime * moveSpeed;
 
-            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(3)) // Heavy lance
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(2)) // Heavy lance
             {
                 h *= 0.66f;
                 v *= 0.66f;
             }
-            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(3)) // Heavy lance
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(2)) // Heavy lance
             {
                 h *= 0.66f;
                 v *= 0.66f;
             }
 
-            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(5)) // Confusion
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(4)) // Confusion
             {
                 h = -h;
                 v = -v;
             }
-            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(5)) // Confusion
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(4)) // Confusion
             {
                 h = -h;
                 v = -v;
@@ -140,6 +140,7 @@ namespace FiveXT.JoustDoIt
         {
             transform.position = origPos;
             controllerAdjust = Vector2.zero;
+            movementInput = Vector2.zero;
 
             spr.sprite = normalLance;
 

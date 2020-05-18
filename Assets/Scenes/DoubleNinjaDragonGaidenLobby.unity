@@ -246,9 +246,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'RT - NINJA attack
+  m_text: 'RT: NINJA attack
 
-    RS - Move NINJA
+    RS: Move NINJA
 
 '
   m_isRightToLeft: 0
@@ -320,10 +320,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1172373903}
-    characterCount: 34
+    characterCount: 32
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 8
+    spaceCount: 6
+    wordCount: 6
     linkCount: 0
     lineCount: 2
     pageCount: 1
@@ -848,26 +848,26 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_text
-      value: 'LT - CLONE smoke
+      value: 'LT: CLONE smoke
 
-        LS - Move CLONE
+        LS: Move CLONE
 
 '
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 33
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}

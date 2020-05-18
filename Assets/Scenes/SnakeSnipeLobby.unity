@@ -523,6 +523,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_text
+      value: 'Left/Right: steer
+
+        A: shoot
+
+        Hit the opponent''s tail
+        to win!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6532621382184034825, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_LocalPosition.x

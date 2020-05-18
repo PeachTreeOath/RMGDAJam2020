@@ -24,9 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DoubleNinjaDragonGaiden.unity
     guid: 98eb954b768abda41b0ee89913f5b68e
   - enabled: 1
-    path: Assets/Scenes/JoustinTimeLobby.unity
+    path: Assets/Scenes/JoustDoitLobby.unity
     guid: 73c9c455999d4e841b1b3321b15a2ad0
   - enabled: 1
-    path: Assets/Scenes/JoustinTime.unity
+    path: Assets/Scenes/JoustDoit.unity
     guid: 0ed92fbabe2cf274ea3227cb33ec67f3
   m_configObjects: {}

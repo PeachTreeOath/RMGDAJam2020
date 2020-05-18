@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 3509040631471425208, guid: 9daab141a5d5e2140aeaffbc2674c435,
         type: 3}
       propertyPath: sceneName
-      value: DuelOfTheDates
+      value: JoustDoIt
       objectReference: {fileID: 0}
     - target: {fileID: 3509040631471425214, guid: 9daab141a5d5e2140aeaffbc2674c435,
         type: 3}
@@ -526,34 +526,35 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_text
-      value: 'L-Stick walk / A choose
+      value: 'LS: aim lance
 
-        Phase 1: Memorize the girls'' info
 
-        Phase
-        2: Choose the correct answer
-
-        before your opponent does'
+        Closest player to target wins'
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 118
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382184034825, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
@@ -668,22 +669,22 @@ PrefabInstance:
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_text
-      value: Joustin' Time
+      value: Joust Do It
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382249105884, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6532621383120392869, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}

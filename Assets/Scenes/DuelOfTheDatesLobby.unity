@@ -526,7 +526,8 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_text
-      value: 'LS walk / A choose
+      value: 'LS: walk / A: choose
+
 
         Phase 1: Memorize the girls'' info
 
@@ -538,7 +539,7 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 113
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
@@ -548,12 +549,12 @@ PrefabInstance:
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6532621382184034825, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}

@@ -529,22 +529,22 @@ PrefabInstance:
       value: 'LS: aim lance
 
 
-        Closest player to target wins'
+        Closest lance to center of shield wins'
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 44
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6207725977302251756, guid: 90913afdd78460a42ba204526cfeebf0,
         type: 3}

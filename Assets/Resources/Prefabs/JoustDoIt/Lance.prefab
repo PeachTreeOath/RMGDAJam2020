@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 646018107507348309}
   - component: {fileID: 646018107507348311}
   m_Layer: 0
-  m_Name: Lance1
+  m_Name: Lance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,5 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 0
+  moveSpeed: 0
   bobSpeed: 0.2
   bobRadius: 2
+  spr: {fileID: 646018107507348309}
+  normalLance: {fileID: 21300000, guid: 1c943df57debd3d4e9864abc10d2b188, type: 3}
+  halfLance: {fileID: 21300000, guid: e165f9e1df2c1324db6dce10420978db, type: 3}

@@ -9,6 +9,7 @@ namespace FiveXT.JoustDoIt
     public class ShopItem : MonoBehaviour
     {
         public int itemId;
+        public int price;
         public TextMeshProUGUI p1Text;
         public TextMeshProUGUI p2Text;
         public Image p1Bought;

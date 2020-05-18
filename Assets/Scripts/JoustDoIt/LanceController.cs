@@ -1,4 +1,5 @@
 ﻿using FiveXT.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace FiveXT.JoustDoIt
         public float moveSpeed;
         public float bobSpeed;
         public float bobRadius;
+        public SpriteRenderer spr;
+        public Sprite normalLance;
+        public Sprite halfLance;
 
         private Vector2 origPos;
 
@@ -29,10 +33,24 @@ namespace FiveXT.JoustDoIt
         // Update is called once per frame
         void Update()
         {
-            float px = Time.time * bobSpeed + (playerNum * 10000);
-            float py = (Time.time * bobSpeed) + 5000 + (playerNum * 10000);
-            float x = (Mathf.PerlinNoise(px, px) - 0.5f) * bobRadius + origPos.x;
-            float y = (Mathf.PerlinNoise(py, py) - 0.5f) * bobRadius + origPos.y;
+            if (GameManager_JoustDoIt.instance.phase != GamePhase.JOUSTING) return;
+
+            float tempBobRadius = bobRadius;
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(2)) // Beer
+                tempBobRadius *= 1.5f;
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(2)) // Beer
+                tempBobRadius *= 1.5f;
+
+            float tempBobSpeed = bobSpeed;
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(4)) // Angry horse
+                tempBobSpeed *= 2f;
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(4)) // Angry horse
+                tempBobSpeed *= 2f;
+
+            float px = Time.time * tempBobSpeed + (playerNum * 10000);
+            float py = (Time.time * tempBobSpeed) + 5000 + (playerNum * 10000);
+            float x = (Mathf.PerlinNoise(px, px) - 0.5f) * tempBobRadius + origPos.x;
+            float y = (Mathf.PerlinNoise(py, py) - 0.5f) * tempBobRadius + origPos.y;
 
             transform.position = new Vector2(x, y) + controllerAdjust;
         }
@@ -40,8 +58,32 @@ namespace FiveXT.JoustDoIt
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (GameManager_JoustDoIt.instance.phase != GamePhase.JOUSTING) return;
+
             float h = movementInput.x * Time.fixedDeltaTime * moveSpeed;
             float v = movementInput.y * Time.fixedDeltaTime * moveSpeed;
+
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(3)) // Heavy lance
+            {
+                h *= 0.66f;
+                v *= 0.66f;
+            }
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(3)) // Heavy lance
+            {
+                h *= 0.66f;
+                v *= 0.66f;
+            }
+
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(5)) // Confusion
+            {
+                h = -h;
+                v = -v;
+            }
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(5)) // Confusion
+            {
+                h = -h;
+                v = -v;
+            }
 
             controllerAdjust += new Vector2(h, v);
         }
@@ -92,6 +134,24 @@ namespace FiveXT.JoustDoIt
         public float GetDistanceFromCenter()
         {
             return Vector2.Distance(transform.position, origPos);
+        }
+
+        public void Reset()
+        {
+            transform.position = origPos;
+            controllerAdjust = Vector2.zero;
+
+            spr.sprite = normalLance;
+
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(1)) // Nearsighted
+                spr.sprite = halfLance;
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(1)) // Nearsighted
+                spr.sprite = halfLance;
+        }
+
+        public void ShowLance()
+        {
+            spr.sprite = normalLance;
         }
     }
 }

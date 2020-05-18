@@ -28,6 +28,11 @@ namespace FiveXT.JoustDoIt
         public GameObject p2RoundVictoryObj;
         public LanceController p1Lance;
         public LanceController p2Lance;
+        public Knight p1Knight;
+        public Knight p2Knight;
+        public TextMeshProUGUI p1CashText;
+        public TextMeshProUGUI p2CashText;
+        public GameObject shopObject;
 
         [HideInInspector] public bool isGameStarted;
         [HideInInspector] public bool isGameOver;
@@ -35,6 +40,11 @@ namespace FiveXT.JoustDoIt
 
         private int p1Points;
         private int p2Points;
+        [HideInInspector] public int p1Cash;
+        [HideInInspector] public int p2Cash;
+
+        [HideInInspector] public List<int> p1BoughtItems = new List<int>();
+        [HideInInspector] public List<int> p2BoughtItems = new List<int>();
 
         private float phaseTimeElapsed;
         [HideInInspector] public float joustingPhaseDuration = 5;
@@ -51,7 +61,7 @@ namespace FiveXT.JoustDoIt
 
         private void Update()
         {
-            if (!IsGamePlayable()) return;
+            if (isGameOver) return;
 
             phaseTimeElapsed += Time.deltaTime;
 
@@ -59,8 +69,8 @@ namespace FiveXT.JoustDoIt
             {
                 if (phaseTimeElapsed > joustingPhaseDuration)
                 {
-                    int playerNum = GetWinner();
-                    ScorePoint(playerNum);
+                    p1Lance.ShowLance();
+                    p2Lance.ShowLance();
 
                     phaseTimeElapsed = 0;
                     phase = GamePhase.JOUST_PAUSE;
@@ -72,7 +82,22 @@ namespace FiveXT.JoustDoIt
 
                 if (phaseTimeElapsed > joustPausePhaseDuration)
                 {
-                    // SHOW RESULTS SCENE
+                    // SHOW RESULTS SCENE...maybe
+
+                    int winnerNum = GetWinner();
+                    ScorePoint(winnerNum);
+                    if (winnerNum == 0)
+                    {
+                        p1Cash += 3;
+                        p2Cash += 2;
+                    }
+                    else
+                    {
+                        p1Cash += 2;
+                        p2Cash += 3;
+                    }
+
+                    if (isGameOver) return;
 
                     phaseTimeElapsed = 0;
                     phase = GamePhase.JOUST_RESULTS;
@@ -84,6 +109,12 @@ namespace FiveXT.JoustDoIt
 
                 if (phaseTimeElapsed > joustResultsPhaseDuration)
                 {
+                    p1BoughtItems.Clear();
+                    p2BoughtItems.Clear();
+
+                    shopObject.SetActive(true);
+                    ShopView.instance.InitShop();
+
                     phaseTimeElapsed = 0;
                     phase = GamePhase.WINNER_SHOP;
                 }
@@ -102,19 +133,18 @@ namespace FiveXT.JoustDoIt
 
         public void GameStart()
         {
-            phase = GamePhase.COUNTING_DOWN;
+            phaseTimeElapsed = 0;
+            phase = GamePhase.JOUSTING;
         }
 
         public void GameOver(int playerNum)
         {
+            p1RoundVictoryObj.SetActive(false);
+            p2RoundVictoryObj.SetActive(false);
+
             isGameOver = true;
             gameOverCanvas.SetActive(true);
             winnerText.text = "Player " + (playerNum + 1) + " wins!";
-        }
-
-        public bool IsGamePlayable()
-        {
-            return isGameStarted && !isGameOver;
         }
 
         public void ScorePoint(int playerNum)
@@ -132,13 +162,38 @@ namespace FiveXT.JoustDoIt
 
             SetHearts();
 
-            // TODO: END GAME
+            if (p1Points == 5)
+                GameOver(0);
+            else if (p2Points == 5)
+                GameOver(1);
+        }
+
+        public void GotoJoustingPhase()
+        {
+            shopObject.SetActive(false);
+            p1RoundVictoryObj.SetActive(false);
+            p2RoundVictoryObj.SetActive(false);
+
+            phaseTimeElapsed = 0;
+            phase = GamePhase.COUNTING_DOWN;
+            GameStartCountdown.instance.StartCountdown();
+
+            p1Lance.Reset();
+            p2Lance.Reset();
+            p1Knight.Reset();
+            p2Knight.Reset();
         }
 
         private void SetHearts()
         {
             p1Hearts.SetIconCount(p1Points);
             p2Hearts.SetIconCount(p2Points);
+        }
+
+        public void UpdateCash()
+        {
+            p1CashText.text = "P1: $" + p1Cash;
+            p2CashText.text = "P2: $" + p2Cash;
         }
     }
 }

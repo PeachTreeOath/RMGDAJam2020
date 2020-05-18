@@ -23,8 +23,6 @@ namespace FiveXT.JoustDoIt
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (!GameManager_JoustDoIt.instance.IsGamePlayable()) return;
-
             if (GameManager_JoustDoIt.instance.phase != GamePhase.WINNER_SHOP) return;
 
             float h = movementInput.x;
@@ -40,26 +38,24 @@ namespace FiveXT.JoustDoIt
 
         public void OnMove(InputValue value)
         {
-            if (!GameManager_JoustDoIt.instance.IsGamePlayable()) return;
-
             if (GameManager_JoustDoIt.instance.phase != GamePhase.WINNER_SHOP) return;
 
             movementInput = value.Get<Vector2>();
-            /*
-            if (isAcceptingInput && movementInput.y > threshold)
+
+            if (isAcceptingInput && movementInput.x < -threshold)
             {
-                InterviewView.instance.MoveAnswerUp(playerNum);
+                ShopView.instance.MoveSelectionLeft(playerNum);
                 isAcceptingInput = false;
             }
-            else if (isAcceptingInput && movementInput.y < -threshold)
+            else if (isAcceptingInput && movementInput.x > threshold)
             {
-                InterviewView.instance.MoveAnswerDown(playerNum);
+                ShopView.instance.MoveSelectionRight(playerNum);
                 isAcceptingInput = false;
             }
-            else if (movementInput.y < threshold && movementInput.y > -threshold)
+            else if (movementInput.x > -threshold && movementInput.x < threshold)
             {
                 isAcceptingInput = true;
-            }*/
+            }
         }
 
         public void OnAim(InputValue value)
@@ -68,12 +64,10 @@ namespace FiveXT.JoustDoIt
         }
 
         public void OnAction1()
-        {/*
-            if (!GameManager_DuelOfTheDates.instance.IsGamePlayable()) return;
+        {
+            if (GameManager_JoustDoIt.instance.phase != GamePhase.WINNER_SHOP) return;
 
-            if (GameManager_DuelOfTheDates.instance.phase != GamePhase.ANSWERING) return;
-
-            InterviewView.instance.SelectAnswer(playerNum);*/
+            ShopView.instance.BuyItem(playerNum);
         }
 
         public void OnAction2()

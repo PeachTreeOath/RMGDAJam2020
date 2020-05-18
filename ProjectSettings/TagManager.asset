@@ -7,6 +7,7 @@ TagManager:
   - Body
   - Tail
   - Slash
+  - Clone
   layers:
   - Default
   - TransparentFX

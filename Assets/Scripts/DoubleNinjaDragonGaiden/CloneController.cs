@@ -105,6 +105,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
             // Do nothing
         }
 
+        /*
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (isDead) return;
@@ -114,9 +115,12 @@ namespace FiveXT.DoubleNinjaDragonGaiden
                 Die();
             }
         }
+        */
 
-        private void Die()
+        public void Die()
         {
+            if (isDead) return;
+
             GameObject death = Instantiate(deathPrefab);
             death.transform.position = transform.position;
 

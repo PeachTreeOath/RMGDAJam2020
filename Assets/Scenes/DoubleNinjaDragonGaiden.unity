@@ -3578,6 +3578,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ninja2
       objectReference: {fileID: 0}
+    - target: {fileID: 8491640236699873635, guid: 0e86238d39240424383396fc4a7b78c6,
+        type: 3}
+      propertyPath: playerNum
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e86238d39240424383396fc4a7b78c6, type: 3}
 --- !u!114 &2059649596 stripped

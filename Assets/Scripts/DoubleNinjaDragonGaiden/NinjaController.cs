@@ -137,6 +137,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
+        /*
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (isDead) return;
@@ -146,9 +147,12 @@ namespace FiveXT.DoubleNinjaDragonGaiden
                 Die();
             }
         }
+        */
 
-        private void Die()
+        public void Die()
         {
+            if (isDead) return;
+
             isDead = true;
             slashObject.SetActive(false);
 

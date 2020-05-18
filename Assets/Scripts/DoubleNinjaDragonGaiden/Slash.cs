@@ -6,16 +6,18 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 {
     public class Slash : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public int playerNum;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            if (collision.tag.Equals("Player") && collision.GetComponentInParent<NinjaController>().playerNum != playerNum)
+            {
+                collision.GetComponentInParent<NinjaController>().Die();
+            }
+            else if (collision.tag.Equals("Clone") && collision.GetComponentInParent<CloneController>().playerNum != playerNum)
+            {
+                collision.GetComponentInParent<CloneController>().Die();
+            }
         }
     }
 }

@@ -16,6 +16,9 @@ namespace FiveXT.JoustDoIt
         // Update is called once per frame
         void Update()
         {
+            if (GameManager_JoustDoIt.instance.phase != GamePhase.JOUSTING)
+                return;
+
             timeElapsed += Time.deltaTime;
 
             float ratio = timeElapsed / GameManager_JoustDoIt.instance.joustingPhaseDuration;

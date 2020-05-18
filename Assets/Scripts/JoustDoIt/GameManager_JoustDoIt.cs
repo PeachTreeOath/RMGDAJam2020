@@ -37,9 +37,9 @@ namespace FiveXT.JoustDoIt
         private int p2Points;
 
         private float phaseTimeElapsed;
-        [HideInInspector] public float joustingPhaseDuration = 10;
+        [HideInInspector] public float joustingPhaseDuration = 5;
         private float joustPausePhaseDuration = 1;
-        private float joustResultsPhaseDuration = 5;
+        private float joustResultsPhaseDuration = 0;
 
         private void Start()
         {
@@ -54,11 +54,14 @@ namespace FiveXT.JoustDoIt
             if (!IsGamePlayable()) return;
 
             phaseTimeElapsed += Time.deltaTime;
-            
+
             if (phase == GamePhase.JOUSTING)
             {
                 if (phaseTimeElapsed > joustingPhaseDuration)
                 {
+                    int playerNum = GetWinner();
+                    ScorePoint(playerNum);
+
                     phaseTimeElapsed = 0;
                     phase = GamePhase.JOUST_PAUSE;
                 }
@@ -85,6 +88,16 @@ namespace FiveXT.JoustDoIt
                     phase = GamePhase.WINNER_SHOP;
                 }
             }
+        }
+
+        private int GetWinner()
+        {
+            float p1Dist = p1Lance.GetDistanceFromCenter();
+            float p2Dist = p2Lance.GetDistanceFromCenter();
+
+            if (p1Dist < p2Dist)
+                return 0;
+            else return 1;
         }
 
         public void GameStart()
@@ -118,6 +131,8 @@ namespace FiveXT.JoustDoIt
             }
 
             SetHearts();
+
+            // TODO: END GAME
         }
 
         private void SetHearts()

@@ -53,7 +53,7 @@ namespace FiveXT.JoustDoIt
 
         public void OnMove(InputValue value)
         {
-            if (!GameManager_JoustDoIt.instance.IsGamePlayable()) return;
+            if (GameManager_JoustDoIt.instance.phase != GamePhase.JOUSTING) return;
 
             movementInput = value.Get<Vector2>();
         }
@@ -87,6 +87,11 @@ namespace FiveXT.JoustDoIt
         {
             if (GameManager_JoustDoIt.instance.isGameOver)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public float GetDistanceFromCenter()
+        {
+            return Vector2.Distance(transform.position, origPos);
         }
     }
 }

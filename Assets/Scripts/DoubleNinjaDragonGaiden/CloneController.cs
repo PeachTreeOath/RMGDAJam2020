@@ -12,6 +12,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public int playerNum;
         public float moveSpeed;
         public SpriteRenderer spr;
+        public SpriteRenderer logSpr;
         public GameObject smokePrefab;
         public GameObject deathPrefab;
         public float smokeBombCooldownTime;
@@ -24,10 +25,6 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         private void Start()
         {
             smokeBombTimeElapsed = smokeBombCooldownTime;
-        }
-
-        private void OnEnable()
-        {
             PlayerControllerManager.instance.RegisterControllable(this, playerNum);
         }
 
@@ -56,11 +53,11 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
             if (h > 0)
                 spr.flipX = true;
-            else
+            else if (h < 0)
                 spr.flipX = false;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             PlayerControllerManager.instance.DeregisterControllable(this, playerNum);
         }
@@ -121,15 +118,27 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         private void Die()
         {
             GameObject death = Instantiate(deathPrefab);
+            death.transform.position = transform.position;
 
             spr.enabled = false;
+            logSpr.enabled = true;
             isDead = true;
+            smokeBombMeter.SetProgress(0);
+
+            GameManager_DoubleNinjaDragonGaiden.instance.OnCloneDeath(playerNum);
         }
 
         public void Revive()
         {
             spr.enabled = true;
+            logSpr.enabled = false;
             isDead = false;
+            smokeBombMeter.SetProgress(0);
+        }
+
+        public void ResetSmokeMeter()
+        {
+            smokeBombTimeElapsed = smokeBombCooldownTime;
         }
 
         public void ThrowSmokeBomb()

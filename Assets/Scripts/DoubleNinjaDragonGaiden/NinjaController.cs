@@ -75,7 +75,6 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public void OnMove(InputValue value)
         {
             // Do nothing
-
         }
 
         public void OnAim(InputValue value)
@@ -151,12 +150,17 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         private void Die()
         {
             isDead = true;
+            slashObject.SetActive(false);
+
+            GameManager_DoubleNinjaDragonGaiden.instance.OnNinjaDeath(playerNum);
         }
 
         public void Revive()
         {
             isDead = false;
             isAttacking = false;
+            attackVector = Vector2.zero;
+            movementInput = Vector2.zero;
         }
 
         private float EaseOutQuart(float start, float end, float value)

@@ -48,6 +48,7 @@ namespace FiveXT.Core
         public void StartCountdown()
         {
             currCountdownTime = countdownTime;
+            countdownText.enabled = true;
             isCountingDown = true;
         }
     }

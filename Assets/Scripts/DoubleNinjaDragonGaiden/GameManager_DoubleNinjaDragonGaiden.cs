@@ -20,36 +20,67 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public CloneController clone2;
         public GameObject p1KOObj;
         public GameObject p2KOObj;
+        public float resetDuration;
 
         [HideInInspector] public bool isGameStarted;
         [HideInInspector] public bool isGameOver;
 
-        private int round;
         private int p1Points;
         private int p2Points;
+        private bool isResetting;
+        private float resetTimeElapsed;
+
+        private Vector2 origP1Pos;
+        private Vector2 origP2Pos;
 
         private void Start()
         {
             GameStartCountdown.instance.RegisterListener(this);
-
-
-            GotoNextRound();
-
+            origP1Pos = ninja1.transform.position;
+            origP2Pos = ninja2.transform.position;
         }
 
         private void Update()
         {
-            if (!IsGamePlayable()) return;
+            if (isResetting)
+            {
+                resetTimeElapsed += Time.deltaTime;
 
-
+                if (resetTimeElapsed > resetDuration)
+                {
+                    ResetGame();
+                }
+            }
         }
 
         public void GameStart()
         {
+            clone1.ResetSmokeMeter();
+            clone2.ResetSmokeMeter();
             clone1.ThrowSmokeBomb();
             clone2.ThrowSmokeBomb();
 
             isGameStarted = true;
+        }
+
+        public void ResetGame()
+        {
+            ninja1.Revive();
+            ninja2.Revive();
+            clone1.Revive();
+            clone2.Revive();
+
+            ninja1.transform.position = origP1Pos;
+            ninja2.transform.position = origP2Pos;
+            clone1.transform.position = origP1Pos;
+            clone2.transform.position = origP2Pos;
+
+            p1KOObj.gameObject.SetActive(false);
+            p2KOObj.gameObject.SetActive(false);
+
+            isResetting = false;
+
+            GameStartCountdown.instance.StartCountdown();
         }
 
         public void GameOver(int playerNum)
@@ -62,12 +93,6 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public bool IsGamePlayable()
         {
             return isGameStarted && !isGameOver;
-        }
-
-        private void GotoNextRound()
-        {
-            round++;
-
         }
 
         public void ScorePoint(int playerNum)
@@ -86,15 +111,43 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
         public void OnNinjaDeath(int playerNum)
         {
+            if (isResetting) // Prevent double KO
+                return;
 
+            if (playerNum == 0)
+            {
+                ScorePoint(1);
+                p2KOObj.gameObject.SetActive(true);
+            }
+            else
+            {
+                ScorePoint(0);
+                p1KOObj.gameObject.SetActive(true);
+            }
+
+            if (p1Points == 5)
+            {
+                GameOver(0);
+                p1KOObj.gameObject.SetActive(false);
+                p2KOObj.gameObject.SetActive(false);
+            }
+            else if (p2Points == 5)
+            {
+                GameOver(1);
+                p1KOObj.gameObject.SetActive(false);
+                p2KOObj.gameObject.SetActive(false);
+            }
+            else
+            {
+                isResetting = true;
+                isGameStarted = false;
+                resetTimeElapsed = 0;
+            }
         }
 
         public void OnCloneDeath(int playerNum)
         {
-            if (playerNum == 0)
-                clone1.gameObject.SetActive(false);
-            else
-                clone2.gameObject.SetActive(false);
+            // Do nothing, might need this later
         }
 
         private void SetScoreIcons()

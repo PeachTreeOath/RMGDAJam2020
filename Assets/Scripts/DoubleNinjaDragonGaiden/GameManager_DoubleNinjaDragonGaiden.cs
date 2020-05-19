@@ -166,7 +166,11 @@ namespace FiveXT.DoubleNinjaDragonGaiden
                     isResetting = true;
                     isGameStarted = false;
                     resetTimeElapsed = 0;
+
                 }
+
+                p1Dead = false;
+                p2Dead = false;
             }
         }
 

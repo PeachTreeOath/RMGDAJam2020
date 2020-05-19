@@ -5,22 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SnakeSnipeLobby.unity
     guid: 3ae306cb98582314987da1f16e5e3b49
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SnakeSnipe.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DuelOfTheDatesLobby.unity
     guid: 8bf5da707471243419c836e983b5fe4f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DuelOfTheDates.unity
     guid: a0405e278e0339141b706fb5b48d609f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DoubleNinjaDragonGaidenLobby.unity
     guid: 2ed89da2be594cf4c929f2cc8dc6f537
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DoubleNinjaDragonGaiden.unity
     guid: 98eb954b768abda41b0ee89913f5b68e
   - enabled: 1

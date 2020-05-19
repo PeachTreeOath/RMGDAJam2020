@@ -41,8 +41,8 @@ namespace FiveXT.JoustDoIt
             p2Locked = false;
 
             ClearSelections();
-            p1SelectedAnswer = 2;
-            p2SelectedAnswer = 2;
+            p1SelectedAnswer = 0;
+            p2SelectedAnswer = 0;
             SetSelections();
             GameManager_JoustDoIt.instance.UpdateCash();
         }

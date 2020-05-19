@@ -42,9 +42,9 @@ namespace FiveXT.JoustDoIt
                 tempBobRadius *= 2f;
 
             float tempBobSpeed = bobSpeed;
-            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(3)) // Angry horse
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(4)) // Angry horse
                 tempBobSpeed *= 2f;
-            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(3)) // Angry horse
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(4)) // Angry horse
                 tempBobSpeed *= 2f;
 
             float px = Time.time * tempBobSpeed + (playerNum * 10000);
@@ -74,12 +74,12 @@ namespace FiveXT.JoustDoIt
                 v *= 0.66f;
             }
 
-            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(4)) // Confusion
+            if (playerNum == 0 && GameManager_JoustDoIt.instance.p2BoughtItems.Contains(3)) // Confusion
             {
                 h = -h;
                 v = -v;
             }
-            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(4)) // Confusion
+            else if (playerNum == 1 && GameManager_JoustDoIt.instance.p1BoughtItems.Contains(3)) // Confusion
             {
                 h = -h;
                 v = -v;

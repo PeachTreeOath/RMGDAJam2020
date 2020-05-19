@@ -51,7 +51,7 @@ namespace FiveXT.JoustDoIt
         private float phaseTimeElapsed;
         [HideInInspector] public float joustingPhaseDuration = 5;
         private float joustPausePhaseDuration = 1;
-        private float joustResultsPhaseDuration = 0;
+        private float joustResultsPhaseDuration = 4;
 
         private void Start()
         {
@@ -86,10 +86,11 @@ namespace FiveXT.JoustDoIt
 
                 if (phaseTimeElapsed > joustPausePhaseDuration)
                 {
-                    // SHOW RESULTS SCENE...maybe
 
                     int winnerNum = GetWinner();
-                    ScorePoint(winnerNum);
+                    ResultsSequence.instance.Show();
+                    ResultsSequence.instance.PlayWinSequence(winnerNum);
+
                     if (winnerNum == 0)
                     {
                         p1Cash += 3;
@@ -101,18 +102,18 @@ namespace FiveXT.JoustDoIt
                         p2Cash += 3;
                     }
 
-                    if (isGameOver) return;
-
                     phaseTimeElapsed = 0;
                     phase = GamePhase.JOUST_RESULTS;
                 }
             }
             else if (phase == GamePhase.JOUST_RESULTS)
             {
-                // PLAY RESULTS SCENE
+                // Playing results scene
 
                 if (phaseTimeElapsed > joustResultsPhaseDuration)
                 {
+                    if (isGameOver) return;
+
                     p1BoughtItems.Clear();
                     p2BoughtItems.Clear();
 
@@ -179,6 +180,7 @@ namespace FiveXT.JoustDoIt
 
         public void GotoJoustingPhase()
         {
+            ResultsSequence.instance.Hide();
             shopObject.SetActive(false);
             p1RoundVictoryObj.SetActive(false);
             p2RoundVictoryObj.SetActive(false);

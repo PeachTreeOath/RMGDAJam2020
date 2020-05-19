@@ -20,6 +20,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
         public CloneController clone2;
         public GameObject p1KOObj;
         public GameObject p2KOObj;
+        public GameObject drawKOObj;
         public float resetDuration;
 
         [HideInInspector] public bool isGameStarted;
@@ -32,6 +33,9 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
         private Vector2 origP1Pos;
         private Vector2 origP2Pos;
+
+        private bool p1Dead;
+        private bool p2Dead;
 
         private void Start()
         {
@@ -69,6 +73,8 @@ namespace FiveXT.DoubleNinjaDragonGaiden
             ninja2.Revive();
             clone1.Revive();
             clone2.Revive();
+            p1Dead = false;
+            p2Dead = false;
 
             ninja1.transform.position = origP1Pos;
             ninja2.transform.position = origP2Pos;
@@ -77,6 +83,7 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
             p1KOObj.gameObject.SetActive(false);
             p2KOObj.gameObject.SetActive(false);
+            drawKOObj.gameObject.SetActive(false);
 
             isResetting = false;
 
@@ -111,37 +118,55 @@ namespace FiveXT.DoubleNinjaDragonGaiden
 
         public void OnNinjaDeath(int playerNum)
         {
-            if (isResetting) // Prevent double KO
-                return;
-
             if (playerNum == 0)
             {
-                ScorePoint(1);
-                p2KOObj.gameObject.SetActive(true);
+                p1Dead = true;
             }
             else
             {
-                ScorePoint(0);
-                p1KOObj.gameObject.SetActive(true);
+                p2Dead = true;
             }
+        }
 
-            if (p1Points == 5)
+        public void LateUpdate()
+        {
+            if (!p1Dead && !p2Dead) return;
+
+            if (!isResetting)
             {
-                GameOver(0);
-                p1KOObj.gameObject.SetActive(false);
-                p2KOObj.gameObject.SetActive(false);
-            }
-            else if (p2Points == 5)
-            {
-                GameOver(1);
-                p1KOObj.gameObject.SetActive(false);
-                p2KOObj.gameObject.SetActive(false);
-            }
-            else
-            {
-                isResetting = true;
-                isGameStarted = false;
-                resetTimeElapsed = 0;
+                if (p1Dead && p2Dead)
+                {
+                    drawKOObj.gameObject.SetActive(true);
+                }
+                else if (p1Dead)
+                {
+                    ScorePoint(1);
+                    p2KOObj.gameObject.SetActive(true);
+                }
+                else if (p2Dead)
+                {
+                    ScorePoint(0);
+                    p1KOObj.gameObject.SetActive(true);
+                }
+
+                if (p1Points == 5)
+                {
+                    GameOver(0);
+                    p1KOObj.gameObject.SetActive(false);
+                    p2KOObj.gameObject.SetActive(false);
+                }
+                else if (p2Points == 5)
+                {
+                    GameOver(1);
+                    p1KOObj.gameObject.SetActive(false);
+                    p2KOObj.gameObject.SetActive(false);
+                }
+                else
+                {
+                    isResetting = true;
+                    isGameStarted = false;
+                    resetTimeElapsed = 0;
+                }
             }
         }
 
